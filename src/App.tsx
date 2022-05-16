@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { ScoreBoard }  from './Components/ScoreBoard/ScoreBoard';
+import { StartNewGame } from './Components/StartNewGame/StartNewGame';
+import styled from 'styled-components';
 
-function App() {
+
+const App = () => {
+  const [playerScore, setPlayerScore] = useState(5);
+  const [compScore, setCompScore] = useState(2);
+
+
+  const restart = (): void => {
+    setPlayerScore(0);
+    setCompScore(0);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Heading>Rock - Paper - scissors</Heading>
+      <ScoreBoard player={ playerScore } computer={ compScore }/>
+      <StartNewGame restart={ restart } />
     </div>
   );
 }
+
+const Heading = styled.h1`
+  text-align: center
+`;
 
 export default App;
