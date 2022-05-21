@@ -9,18 +9,18 @@ export const Rules: React.FC = () => {
         toggleModal(true);
     }
 
-    const closeRules = () => {
+    const closeRules = (): void => {
         toggleModal(false);
     }
 
     return (
-        <div>
+        <>
             <Button onClickCallback={ () => showRules() }>
                 Rules
             </Button>
             <Modal isShown={ isModalShown } onClose={ () => closeRules() }>
                 Game rules
             </Modal>
-        </div>
+        </>
     )
 }
