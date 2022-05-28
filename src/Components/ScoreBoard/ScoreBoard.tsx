@@ -13,14 +13,18 @@ export const ScoreBoard: React.FC<TProps> = ({
   return (
     <Wrapper>
       <Score>
-        <Row>
-          <Column>Player</Column>
-          <Column>Computer</Column>
-        </Row>
-        <Row>
-          <Column>{playerScore}</Column>
-          <Column>{computerScore}</Column>
-        </Row>
+        <thead>
+          <tr>
+            <th>Player</th>
+            <th>Computer</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{playerScore}</td>
+            <td>{computerScore}</td>
+          </tr>
+        </tbody>
       </Score>
     </Wrapper>
   );
@@ -42,13 +46,7 @@ const Wrapper = styled.div`
   font-size: 2rem;
 `;
 
-const Score = styled.div``;
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Column = styled.div`
-  flex: 0 0 50%;
+const Score = styled.table`
+  width: 100%;
   text-align: center;
 `;
