@@ -1,5 +1,5 @@
 export enum EOption {
-  ROCK,
-  PAPER,
-  SCISSORS,
+  ROCK = 'rock',
+  PAPER = 'paper',
+  SCISSORS = 'scissors',
 }
