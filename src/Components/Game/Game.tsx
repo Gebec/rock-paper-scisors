@@ -16,28 +16,28 @@ export const Game: React.FC<TProps> = ({ setUserChoice }) => {
   const setChoice = (event: React.MouseEvent<HTMLButtonElement>): void => {
     const choice: string | null = event.currentTarget.getAttribute('data-id');
     if (choice !== null) {
-      setUserChoice(Number(choice) as unknown as EOption);
+      setUserChoice(choice as unknown as EOption);
     }
   };
 
   return (
     <GameWrapper>
       <Choice
-        id={EOption.PAPER.toString()}
+        id={EOption.PAPER}
         onClickCallback={setChoice}
         borderColor='#ffaa00'
       >
         <Paper />
       </Choice>
       <Choice
-        id={EOption.ROCK.toString()}
+        id={EOption.ROCK}
         onClickCallback={setChoice}
         borderColor='#4055bf'
       >
         <Rock />
       </Choice>
       <Choice
-        id={EOption.SCISSORS.toString()}
+        id={EOption.SCISSORS}
         onClickCallback={setChoice}
         borderColor='#ff002b'
       >
