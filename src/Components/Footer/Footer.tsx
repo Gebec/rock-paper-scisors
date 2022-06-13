@@ -6,20 +6,20 @@ import { Rules } from '../Rules/Rules';
 import styled from 'styled-components';
 
 type TProps = {
-  restart(): void;
+  newGame(): void;
 };
 
-export const Footer: React.FC<TProps> = ({ restart }) => {
+export const Footer: React.FC<TProps> = ({ newGame }) => {
   return (
     <Container>
-      <Button onClickCallback={restart}>Start new game</Button>
+      <Button onClickCallback={newGame}>Start new game</Button>
       <Rules />
     </Container>
   );
 };
 
 Footer.propTypes = {
-  restart: PropTypes.func.isRequired,
+  newGame: PropTypes.func.isRequired,
 };
 
 const Container = styled.div`

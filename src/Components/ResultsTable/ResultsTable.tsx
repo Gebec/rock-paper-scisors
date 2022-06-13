@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { EOption } from '../../option.enum';
@@ -11,17 +11,31 @@ import Rock from '../../Assets/images/rock';
 import Paper from '../../Assets/images/paper';
 import Scissors from '../../Assets/images/scissors';
 
+import { getRandomOption } from '../../Helpers/getRandomOption';
+import { evaluateResult } from '../../Helpers/evaluateResult';
+import { TScore } from '../../App';
+
 type TProps = {
   userChoice: EOption | null;
-  computerChoice: EOption | null;
-  result: EResult | null;
+  score: TScore;
+  setScore(score: TScore): void;
 };
 
-export const ResultsTable: React.FC<TProps> = ({
-  userChoice,
-  computerChoice,
-  result,
-}) => {
+export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) => {
+  const [roundResult, setRoundResult] = useState<React.ReactElement | null>(null);
+  const [computerChoice, setComputerChoice] = useState<EOption | null>(null);
+
+  useEffect(() => {
+    if (userChoice) {
+      setTimeout(() => {
+        const computer: EOption = getRandomOption();
+        setComputerChoice(computer);
+        const result: EResult = evaluateResult(userChoice, computer);
+        setResult(result);
+      }, 1000);
+    }
+  }, [userChoice]);
+
   const getChoice = (choice: EOption): ReactElement => {
     switch (choice) {
       case EOption.PAPER:
@@ -35,22 +49,27 @@ export const ResultsTable: React.FC<TProps> = ({
     }
   };
 
-  const getResult = (result: EResult | null): ReactElement => {
+  const setResult = (result: EResult | null): void => {
     switch (result) {
       case EResult.COMPUTER_WIN:
-        return <div>Computer win</div>;
+        setScore({ player: score.player, computer: ++score.computer });
+        setRoundResult(<div>Computer win</div>);
+        break;
       case EResult.DRAW:
-        return <div>It&apos;s a draw</div>;
+        setRoundResult(<div>It&apos;s a draw</div>);
+        break;
       case EResult.USER_WIN:
-        return <div>You win</div>;
+        setScore({ player: ++score.player, computer: score.computer });
+        setRoundResult(<div>You win</div>);
+        break;
       default:
-        return <div></div>;
+        setRoundResult(<div></div>);
     }
   };
 
   return (
     <ResultsWrapper>
-      {getResult(result)}
+      {roundResult}
       {userChoice && (
         <Choice id={EOption.ROCK} borderColor='#4055bf' disabled={true}>
           {getChoice(userChoice)}
@@ -67,22 +86,15 @@ export const ResultsTable: React.FC<TProps> = ({
 
 ResultsTable.propTypes = {
   userChoice: PropTypes.oneOf([EOption.PAPER, EOption.ROCK, EOption.SCISSORS]),
-  computerChoice: PropTypes.oneOf([
-    EOption.PAPER,
-    EOption.ROCK,
-    EOption.SCISSORS,
-  ]),
-  result: PropTypes.oneOf([
-    EResult.COMPUTER_WIN,
-    EResult.DRAW,
-    EResult.USER_WIN,
-  ]),
+  score: PropTypes.shape({
+    player: PropTypes.number.isRequired,
+    computer: PropTypes.number.isRequired,
+  }).isRequired,
+  setScore: PropTypes.func.isRequired,
 };
 
 ResultsTable.defaultProps = {
   userChoice: null,
-  computerChoice: null,
-  result: null,
 };
 
 const ResultsWrapper = styled.div`

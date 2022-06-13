@@ -2,14 +2,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 type TProps = {
-  playerScore: number;
-  computerScore: number;
+  score: {
+    player: number;
+    computer: number;
+  };
 };
 
-export const ScoreBoard: React.FC<TProps> = ({
-  playerScore,
-  computerScore,
-}) => {
+export const ScoreBoard: React.FC<TProps> = ({ score }) => {
   return (
     <Wrapper>
       <Score>
@@ -21,8 +20,8 @@ export const ScoreBoard: React.FC<TProps> = ({
         </thead>
         <tbody>
           <tr>
-            <td>{playerScore}</td>
-            <td>{computerScore}</td>
+            <td>{score.player}</td>
+            <td>{score.computer}</td>
           </tr>
         </tbody>
       </Score>
@@ -31,8 +30,10 @@ export const ScoreBoard: React.FC<TProps> = ({
 };
 
 ScoreBoard.propTypes = {
-  playerScore: PropTypes.number.isRequired,
-  computerScore: PropTypes.number.isRequired,
+  score: PropTypes.shape({
+    player: PropTypes.number.isRequired,
+    computer: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 // TODO: fix colors
