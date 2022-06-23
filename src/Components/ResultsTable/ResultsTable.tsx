@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { EOption } from '../../option.enum';
@@ -6,10 +6,6 @@ import { EResult } from '../../result.enum';
 import { Choice } from '../Choice/Choice';
 
 import styled from 'styled-components';
-
-import Rock from '../../Assets/images/rock';
-import Paper from '../../Assets/images/paper';
-import Scissors from '../../Assets/images/scissors';
 
 import { getRandomOption } from '../../Helpers/getRandomOption';
 import { evaluateResult } from '../../Helpers/evaluateResult';
@@ -27,27 +23,18 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) 
 
   useEffect(() => {
     if (userChoice) {
-      setTimeout(() => {
+      const resultHandler: NodeJS.Timeout = setTimeout(() => {
         const computer: EOption = getRandomOption();
         setComputerChoice(computer);
         const result: EResult = evaluateResult(userChoice, computer);
         setResult(result);
       }, 1000);
-    }
-  }, [userChoice]);
 
-  const getChoice = (choice: EOption): ReactElement => {
-    switch (choice) {
-      case EOption.PAPER:
-        return <Paper />;
-      case EOption.ROCK:
-        return <Rock />;
-      case EOption.SCISSORS:
-        return <Scissors />;
-      default:
-        return <div></div>;
+      return () => clearTimeout(resultHandler);
     }
-  };
+
+    return;
+  }, [userChoice]);
 
   const setResult = (result: EResult | null): void => {
     switch (result) {
@@ -70,16 +57,8 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) 
   return (
     <ResultsWrapper>
       {roundResult}
-      {userChoice && (
-        <Choice id={EOption.ROCK} borderColor='#4055bf' disabled={true}>
-          {getChoice(userChoice)}
-        </Choice>
-      )}
-      {computerChoice && (
-        <Choice id={EOption.SCISSORS} borderColor='#ff002b' disabled={true}>
-          {getChoice(computerChoice)}
-        </Choice>
-      )}
+      {userChoice && <Choice id={userChoice} disabled={true} />}
+      {computerChoice && <Choice id={EOption.SCISSORS} disabled={true} />}
     </ResultsWrapper>
   );
 };

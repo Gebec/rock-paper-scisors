@@ -4,10 +4,6 @@ import { EOption } from '../../option.enum';
 
 import styled from 'styled-components';
 
-import Rock from '../../Assets/images/rock';
-import Paper from '../../Assets/images/paper';
-import Scissors from '../../Assets/images/scissors';
-
 type TProps = {
   setUserChoice(choice: EOption): void;
 };
@@ -22,27 +18,9 @@ export const Game: React.FC<TProps> = ({ setUserChoice }) => {
 
   return (
     <GameWrapper>
-      <Choice
-        id={EOption.PAPER}
-        onClickCallback={setChoice}
-        borderColor='#ffaa00'
-      >
-        <Paper />
-      </Choice>
-      <Choice
-        id={EOption.ROCK}
-        onClickCallback={setChoice}
-        borderColor='#4055bf'
-      >
-        <Rock />
-      </Choice>
-      <Choice
-        id={EOption.SCISSORS}
-        onClickCallback={setChoice}
-        borderColor='#ff002b'
-      >
-        <Scissors />
-      </Choice>
+      <Choice id={EOption.PAPER} onClickCallback={setChoice} />
+      <Choice id={EOption.ROCK} onClickCallback={setChoice} />
+      <Choice id={EOption.SCISSORS} onClickCallback={setChoice} />
     </GameWrapper>
   );
 };
@@ -57,6 +35,6 @@ const GameWrapper = styled.div`
   padding-top: 5rem;
 
   button:nth-child(2) {
-    transform: translate(0, 150%);
+    margin-top: 15rem;
   }
 `;
