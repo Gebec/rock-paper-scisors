@@ -58,7 +58,7 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) 
     <ResultsWrapper>
       {roundResult}
       {userChoice && <Choice id={userChoice} disabled={true} />}
-      {computerChoice && <Choice id={EOption.SCISSORS} disabled={true} />}
+      {computerChoice && <Choice id={computerChoice} disabled={true} />}
     </ResultsWrapper>
   );
 };
