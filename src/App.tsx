@@ -29,10 +29,10 @@ const App = () => {
         {userChoice === null ? (
           <Game setUserChoice={handleUserChoice} />
         ) : (
-          <ResultsTable userChoice={userChoice} score={score} setScore={setScore} />
+          <ResultsTable userChoice={userChoice} score={score} setScore={setScore} newGame={newGame} />
         )}
       </GameWrapper>
-      <Footer newGame={newGame} />
+      <Footer />
     </AppComponent>
   );
 };

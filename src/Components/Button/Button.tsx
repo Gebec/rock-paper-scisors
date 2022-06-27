@@ -8,9 +8,7 @@ type TProps = {
 };
 
 export const Button: React.FC<TProps> = ({ onClickCallback, children }) => {
-  return (
-    <ButtonComponent onClick={onClickCallback}>{children}</ButtonComponent>
-  );
+  return <ButtonComponent onClick={onClickCallback}>{children}</ButtonComponent>;
 };
 
 Button.propTypes = {
@@ -24,4 +22,5 @@ const ButtonComponent = styled.button`
   background-color: transparent;
   padding: 6px 18px;
   color: white;
+  cursor: pointer;
 `;

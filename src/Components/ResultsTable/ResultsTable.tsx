@@ -10,14 +10,16 @@ import styled from 'styled-components';
 import { getRandomOption } from '../../Helpers/getRandomOption';
 import { evaluateResult } from '../../Helpers/evaluateResult';
 import { TScore } from '../../App';
+import { Button } from '../';
 
 type TProps = {
   userChoice: EOption | null;
   score: TScore;
   setScore(score: TScore): void;
+  newGame(): void;
 };
 
-export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) => {
+export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore, newGame }) => {
   const [roundResult, setRoundResult] = useState<React.ReactElement | null>(null);
   const [computerChoice, setComputerChoice] = useState<EOption | null>(null);
 
@@ -40,14 +42,14 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) 
     switch (result) {
       case EResult.COMPUTER_WIN:
         setScore({ player: score.player, computer: ++score.computer });
-        setRoundResult(<div>Computer win</div>);
+        setRoundResult(<div>You lost...</div>);
         break;
       case EResult.DRAW:
-        setRoundResult(<div>It&apos;s a draw</div>);
+        setRoundResult(<div>It&apos;s a draw.</div>);
         break;
       case EResult.USER_WIN:
         setScore({ player: ++score.player, computer: score.computer });
-        setRoundResult(<div>You win</div>);
+        setRoundResult(<div>You win!</div>);
         break;
       default:
         setRoundResult(<div></div>);
@@ -56,8 +58,13 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore }) 
 
   return (
     <ResultsWrapper>
-      {roundResult}
       {userChoice && <Choice id={userChoice} disabled={true} />}
+      {roundResult && (
+        <RoundResult>
+          <h3>{roundResult}</h3>
+          <Button onClickCallback={newGame}>Play again</Button>
+        </RoundResult>
+      )}
       {computerChoice && <Choice id={computerChoice} disabled={true} />}
     </ResultsWrapper>
   );
@@ -70,6 +77,7 @@ ResultsTable.propTypes = {
     computer: PropTypes.number.isRequired,
   }).isRequired,
   setScore: PropTypes.func.isRequired,
+  newGame: PropTypes.func.isRequired,
 };
 
 ResultsTable.defaultProps = {
@@ -81,4 +89,12 @@ const ResultsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  padding: 4rem;
+`;
+
+const RoundResult = styled.div`
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
