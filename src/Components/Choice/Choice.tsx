@@ -26,7 +26,7 @@ export const Choice: React.FC<TProps> = ({ onClickCallback, id, disabled = false
 
 Choice.propTypes = {
   onClickCallback: PropTypes.func,
-  id: PropTypes.oneOf([...Object.keys(EOption)] as EOption[]).isRequired,
+  id: PropTypes.oneOf([...Object.values(EOption)] as EOption[]).isRequired,
   disabled: PropTypes.bool,
 };
 
