@@ -38,7 +38,7 @@ const App = () => {
 };
 
 const AppComponent = styled.div`
-  background-color: #28284f;
+  background-color: hsl(240, 33%, 23%);
   color: white;
   display: flex;
   flex-direction: column;

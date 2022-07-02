@@ -1,23 +1,44 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Arrow, Button, Choice } from '../';
+import { EOption } from '../../option.enum';
 
 type TProps = {
   isShown: boolean;
   onClose: () => void;
-  children: string;
 };
 
-export const Modal: React.FC<TProps> = ({ isShown, onClose, children }) => {
+export const Modal: React.FC<TProps> = ({ isShown, onClose }) => {
   if (!isShown) {
     return null;
   }
 
   return (
     <ModalComponent>
-      <div>
-        <button onClick={onClose}>X</button>
-      </div>
-      <div>{children}</div>
+      <ModalWrapper>
+        <CloseButton>
+          <Button onClickCallback={onClose}>X</Button>
+        </CloseButton>
+        <Content>
+          <ButtonsWrapper>
+            <Choice id={EOption.PAPER} disabled={true} />
+            <Choice id={EOption.ROCK} disabled={true} />
+            <Choice id={EOption.SCISSORS} disabled={true} />
+          </ButtonsWrapper>
+
+          <ArrowsWrapper>
+            <div>
+              <Arrow />
+            </div>
+            <div>
+              <Arrow />
+            </div>
+            <div>
+              <Arrow />
+            </div>
+          </ArrowsWrapper>
+        </Content>
+      </ModalWrapper>
     </ModalComponent>
   );
 };
@@ -25,7 +46,6 @@ export const Modal: React.FC<TProps> = ({ isShown, onClose, children }) => {
 Modal.propTypes = {
   isShown: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.string.isRequired,
 };
 
 const ModalComponent = styled.div`
@@ -36,6 +56,58 @@ const ModalComponent = styled.div`
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+`;
+
+const ModalWrapper = styled.div`
+  width: min(42rem, 50%);
+  height: min(40rem, 75%);
+  background-color: hsl(240, 33%, 23%);
+  margin-top: 9vh;
+  border-radius: 0.5rem;
+`;
+
+const Content = styled.div`
+  position: relative;
+`;
+
+const CloseButton = styled.div`
+  text-align: right;
+  cursor: pointer;
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+
+  button:nth-child(2) {
+    margin-top: 17rem;
+  }
+`;
+
+const ArrowsWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+
+  & > * {
+    position: absolute;
+  }
+
+  & > div:nth-child(3n + 0) {
+    transform: translate(13rem, 18rem) rotate(56deg);
+  }
+
+  & > div:nth-child(3n + 1) {
+    transform: translate(23rem, 18rem) rotate(303deg);
+  }
+
+  & > div:nth-child(3n + 2) {
+    transform: translate(18rem, 9rem) rotate(180deg);
+  }
 `;

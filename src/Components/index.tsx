@@ -1,3 +1,4 @@
+export { Arrow } from './Arrow/Arrow';
 export { Button } from './Button/Button';
 export { Choice } from './Choice/Choice';
 export { Footer } from './Footer/Footer';
