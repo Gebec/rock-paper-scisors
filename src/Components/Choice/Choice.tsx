@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { EOption } from '../../option.enum';
+import { EOption } from '../../Enums/option.enum';
 import { ChoiceProperties, TChoiceProperties } from './ChoiceProperties';
 
 type TProps = {

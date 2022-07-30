@@ -1,6 +1,6 @@
 import { Choice } from '../';
 import PropTypes from 'prop-types';
-import { EOption } from '../../option.enum';
+import { EOption } from '../../Enums/option.enum';
 
 import styled from 'styled-components';
 

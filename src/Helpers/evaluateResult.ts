@@ -1,5 +1,5 @@
-import { EOption } from '../option.enum';
-import { EResult } from '../result.enum';
+import { EOption } from '../Enums/option.enum';
+import { EResult } from '../Enums/result.enum';
 
 const choices: { [key in EOption]: { [key in EOption]: EResult } } = {
   [EOption.PAPER]: {
@@ -18,9 +18,6 @@ const choices: { [key in EOption]: { [key in EOption]: EResult } } = {
     [EOption.SCISSORS]: EResult.DRAW,
   },
 };
-export const evaluateResult = (
-  userChoice: EOption,
-  computerChoice: EOption
-): EResult => {
+export const evaluateResult = (userChoice: EOption, computerChoice: EOption): EResult => {
   return choices[userChoice][computerChoice];
 };

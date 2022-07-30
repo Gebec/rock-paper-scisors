@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Footer, Game, ResultsTable, ScoreBoard } from './Components';
-import { EOption } from './option.enum';
+import { EOption } from './Enums/option.enum';
 
 import styled from 'styled-components';
 

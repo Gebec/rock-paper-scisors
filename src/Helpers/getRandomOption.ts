@@ -1,4 +1,4 @@
-import { EOption } from '../option.enum';
+import { EOption } from '../Enums/option.enum';
 
 export const getRandomOption = (): EOption => {
   const enumValues = Object.values(EOption);

@@ -1,4 +1,4 @@
-import { EOption } from '../../option.enum';
+import { EOption } from '../../Enums/option.enum';
 
 import Rock from '../../Assets/images/rock';
 import Paper from '../../Assets/images/paper';

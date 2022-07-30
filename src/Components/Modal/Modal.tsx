@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Arrow, Button, Choice } from '../';
-import { EOption } from '../../option.enum';
+import { EOption } from '../../Enums/option.enum';
 
 type TProps = {
   isShown: boolean;

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { EOption } from '../../option.enum';
-import { EResult } from '../../result.enum';
+import { EOption } from '../../Enums/option.enum';
+import { EResult } from '../../Enums/result.enum';
 import { Choice } from '../Choice/Choice';
 
 import styled from 'styled-components';
