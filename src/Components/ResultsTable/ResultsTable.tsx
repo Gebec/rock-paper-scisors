@@ -58,14 +58,24 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore, ne
 
   return (
     <ResultsWrapper>
-      {userChoice && <Choice id={userChoice} disabled={true} />}
+      {userChoice && (
+        <PickWrapper>
+          <PickHeader>You picked</PickHeader>
+          <Choice id={userChoice} disabled={true} />
+        </PickWrapper>
+      )}
       {roundResult && (
         <RoundResult>
-          <h3>{roundResult}</h3>
+          <Result>{roundResult}</Result>
           <ButtonLarge onClickCallback={newGame}>Play again</ButtonLarge>
         </RoundResult>
       )}
-      {computerChoice && <Choice id={computerChoice} disabled={true} />}
+      {computerChoice && (
+        <PickWrapper>
+          <PickHeader>Computer picked</PickHeader>
+          <Choice id={computerChoice} disabled={true} />
+        </PickWrapper>
+      )}
     </ResultsWrapper>
   );
 };
@@ -89,7 +99,17 @@ const ResultsWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 4rem;
+  padding: 2rem 4rem;
+`;
+
+const PickWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const PickHeader = styled.h3`
+  font-size: 1.25rem;
 `;
 
 const RoundResult = styled.div`
@@ -97,4 +117,8 @@ const RoundResult = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Result = styled.h2`
+  font-size: 2rem;
 `;
