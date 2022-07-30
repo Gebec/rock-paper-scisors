@@ -7,20 +7,43 @@ type TProps = {
   children: string;
 };
 
-export const Button: React.FC<TProps> = ({ onClickCallback, children }) => {
-  return <ButtonComponent onClick={onClickCallback}>{children}</ButtonComponent>;
+const ButtonDefault: React.FC<TProps> = ({ onClickCallback, children }) => {
+  return <Default onClick={onClickCallback}>{children}</Default>;
 };
 
-Button.propTypes = {
+const ButtonLarge: React.FC<TProps> = ({ onClickCallback, children }) => {
+  return <Large onClick={onClickCallback}>{children}</Large>;
+};
+
+export { ButtonDefault as Button, ButtonLarge };
+
+const componentProps = {
   onClickCallback: PropTypes.func.isRequired,
   children: PropTypes.string.isRequired,
 };
 
-const ButtonComponent = styled.button`
-  border: 2px solid white;
+ButtonDefault.propTypes = componentProps;
+ButtonLarge.propTypes = componentProps;
+
+const Button = styled.button`
+  border-width: 2px;
+  border-style: solid;
   border-radius: 4px;
+  cursor: pointer;
+`;
+
+const Default = styled(Button)`
+  border-color: white;
   background-color: transparent;
   padding: 6px 18px;
   color: white;
-  cursor: pointer;
+`;
+
+const Large = styled(Button)`
+  border-color: white;
+  background-color: white;
+  padding: 10px 24px;
+  color: hsl(240, 33%, 23%);
+  font-weight: 700;
+  font-size: 1.1rem;
 `;

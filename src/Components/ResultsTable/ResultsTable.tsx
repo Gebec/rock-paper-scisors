@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { getRandomOption } from '../../Helpers/getRandomOption';
 import { evaluateResult } from '../../Helpers/evaluateResult';
 import { TScore } from '../../App';
-import { Button } from '../';
+import { ButtonLarge } from '../';
 
 type TProps = {
   userChoice: EOption | null;
@@ -62,7 +62,7 @@ export const ResultsTable: React.FC<TProps> = ({ userChoice, score, setScore, ne
       {roundResult && (
         <RoundResult>
           <h3>{roundResult}</h3>
-          <Button onClickCallback={newGame}>Play again</Button>
+          <ButtonLarge onClickCallback={newGame}>Play again</ButtonLarge>
         </RoundResult>
       )}
       {computerChoice && <Choice id={computerChoice} disabled={true} />}
